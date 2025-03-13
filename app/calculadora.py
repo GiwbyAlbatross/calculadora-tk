@@ -239,6 +239,11 @@ class Calculadora(object):
         self._BTN_DEL['command'] = self._del_last_value_in_input
         self._BTN_CLEAR['command'] = self._clear_input
         self._BTN_RESULT['command'] = self._get_data_in_input
+    
+    def _bind_keyboard(self):
+        " use a for loop to bind all the number keys to entering that value into the text input "
+        for i in range(10):
+            self.master.bind_all(str(i), partial(self._set_values_in_input, i))
 
     def _set_values_in_input(self, value):
         """Metódo responsável por captar o valor númerico clicado e setar no input"""
