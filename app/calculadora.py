@@ -244,6 +244,10 @@ class Calculadora(object):
         " use a for loop to bind all the number keys to entering that value into the text input "
         for i in range(10):
             self.master.bind_all(str(i), partial(self._set_values_in_input, i))
+        for op in ['*', '/', '+', '-']:
+            self.master.bind_all(op, partial(self._set_operator_in_input, op))
+        self.master.bind_all('(', self._set_open_parent)
+        self.master.bind_all(')', self._set_close_parent)
 
     def _set_values_in_input(self, value):
         """Metódo responsável por captar o valor númerico clicado e setar no input"""
