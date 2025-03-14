@@ -241,13 +241,18 @@ class Calculadora(object):
         self._BTN_RESULT['command'] = self._get_data_in_input
     
     def _bind_keyboard(self):
-        " use a for loop to bind all the number keys to entering that value into the text input "
+        " bind all the number keys to entering that value into the text input and then do the operators "
         for i in range(10):
             self.master.bind_all(str(i), partial(self._set_values_in_input, i))
         for op in ['*', '/', '+', '-']:
             self.master.bind_all(op, partial(self._set_operator_in_input, op))
+        self.master.bind_all('*', partial(self._set_operator_in_input('**')))
         self.master.bind_all('(', self._set_open_parent)
         self.master.bind_all(')', self._set_close_parent)
+        self.master.bind_all('<BackSpace>', self._del_last_value_in_input) # need to test this
+        self.master.bind_all('=', self._get_data_in_input)
+        self.master.bind_all('<Return>', self._get_data_in_input)
+        self.master.bind_all('.', self._set_dot_in_input)
 
     def _set_values_in_input(self, value):
         """Metódo responsável por captar o valor númerico clicado e setar no input"""
