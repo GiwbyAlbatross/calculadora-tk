@@ -246,10 +246,11 @@ class Calculadora(object):
             self.master.bind_all(str(i), partial(self._set_values_in_input, i))
         for op in ['*', '/', '+', '-']:
             self.master.bind_all(op, partial(self._set_operator_in_input, op))
-        self.master.bind_all('*', partial(self._set_operator_in_input('**')))
+        self.master.bind_all('^', partial(self._set_operator_in_input, '**'))
         self.master.bind_all('(', self._set_open_parent)
         self.master.bind_all(')', self._set_close_parent)
         self.master.bind_all('<BackSpace>', self._del_last_value_in_input) # need to test this
+        self.master.bind_all('<Delete>', self._clear_input)
         self.master.bind_all('=', self._get_data_in_input)
         self.master.bind_all('<Return>', self._get_data_in_input)
         self.master.bind_all('.', self._set_dot_in_input)
